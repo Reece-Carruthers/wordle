@@ -21,7 +21,9 @@ function App() {
     return (
         <>
             <Banner />
-            <Wordle gameSettings={gameSettings} />
+            <div className="mt-5">
+                <Wordle gameSettings={gameSettings}/>
+            </div>
         </>
     )
 }
