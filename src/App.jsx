@@ -9,12 +9,19 @@
  * @constructor
  */
 import Wordle from "./components/Wordle.jsx";
+import Banner from "./components/Banner.jsx";
 
 function App() {
 
+    const gameSettings = {
+        numberOfGuesses: 6,
+        sizeOfWord: 5
+    }
+
     return (
         <>
-            <Wordle />
+            <Banner />
+            <Wordle gameSettings={gameSettings} />
         </>
     )
 }

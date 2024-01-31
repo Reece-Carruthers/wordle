@@ -1,9 +1,6 @@
 import Row from "./Row.jsx";
 
-export default function Grid() {
-
-    const numberOfGuesses = 6
-    const sizeOfWord = 5
+export default function Grid({numberOfGuesses, sizeOfWord}) {
 
     const gridStyling = `grid grid-cols-${sizeOfWord + 1} grid-rows-${numberOfGuesses}`
 

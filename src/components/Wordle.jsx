@@ -1,12 +1,11 @@
 import Grid from "./Grid.jsx";
 
-export default function Wordle() {
+export default function Wordle({gameSettings}) {
     return (
         <>
-            <div>
-                <Grid />
+            <div className="flex justify-center mt-5">
+                <Grid numberOfGuesses={gameSettings.numberOfGuesses} sizeOfWord={gameSettings.sizeOfWord}/>
             </div>
-            <p>Hello World!</p>
         </>
     )
 }
