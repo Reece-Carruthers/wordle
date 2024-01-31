@@ -4,7 +4,7 @@ export default function Row({ rowNumber , sizeOfWord}) {
 
     return (
         <>
-            <div id={"row-"+rowNumber}>
+            <div id={"row-"+rowNumber} className="flex flex-row">
                 {[...Array(sizeOfWord).keys()].map((i) => {
                     return (
                         <button className={buttonStyling} key={i}>
