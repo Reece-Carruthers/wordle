@@ -1,4 +1,4 @@
-export default function Keyboard() {
+export default function Keyboard({setGuess}) {
 
     const keyboardLetters = [
         ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
@@ -15,8 +15,11 @@ export default function Keyboard() {
                     {letterGroup.map((letter) => {
                         return (
                             <button key={letter}
-                                    className="p-5 m-1 sm:m-2 bg-neutral-900 rounded-md drop-shadow-md text-white"
+                                    className="p-3 m-1 sm:p-5 bg-neutral-900 rounded-md drop-shadow-md text-white text-xs sm:text-base"
                                     value={letter}
+                                    onClick={(e) => {
+                                        setGuess(e.target.value)
+                                    }}
                             >
                                 {letter}
                             </button>

@@ -1,16 +1,18 @@
-import Row from "./Row.jsx";
+import PropTypes from "prop-types";
 
-export default function Grid({numberOfGuesses, sizeOfWord}) {
+export default function Grid({rows}) {
 
     return (
         <>
             <div className="flex flex-col">
-                {[...Array(numberOfGuesses).keys()].map((i) => {
-                    return (
-                        <Row rowNumber={i} sizeOfWord={sizeOfWord} key={i} />
-                    )
-                })}
+                {rows.map((row, index) => (
+                    <span key={index}>{row}</span>
+                ))}
             </div>
         </>
     )
 }
+
+Grid.propTypes = {
+    rows: PropTypes.arrayOf(PropTypes.element).isRequired,
+};

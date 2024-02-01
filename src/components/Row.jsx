@@ -1,18 +1,22 @@
-export default function Row({ rowNumber , sizeOfWord}) {
+import PropTypes from "prop-types";
 
-    const buttonStyling = "p-5 m-1 sm:m-2 bg-neutral-400 rounded-md drop-shadow-md"
+export default function Row({rowBoxes}) {
 
     return (
         <>
-            <div id={"row-"+rowNumber} className="flex flex-row">
-                {[...Array(sizeOfWord).keys()].map((i) => {
+            <div className="flex flex-row">
+                {rowBoxes.map((rowBox, index) => {
                     return (
-                        <button className={buttonStyling} key={i}>
-                            {rowNumber}
-                        </button>
+                        <span key={index}>{rowBox}</span>
                     )
                 })}
             </div>
         </>
     )
 }
+
+Row.propTypes = {
+    rowBoxes: PropTypes.arrayOf(PropTypes.shape({
+        value: PropTypes.string
+    })).isRequired,
+};
