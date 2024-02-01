@@ -20,12 +20,46 @@ export default function Wordle({gameSettings}) {
 
     const [gameState, setGameState] = useState({
         currentGuess: [0, 0],
-        word: "zebra",
-        guess: "",
+        word: "zebra"
     })
 
-    const setGuess = (guess) => {
-        setGameState({...gameState, guess: guess})
+    const updateGuessCoordinates = () => {
+
+        const currentRowIndex = gameState.currentGuess[0]
+        const currentBoxIndex = gameState.currentGuess[1]
+        const endOfRow = (currentBoxIndex) => {
+            return currentBoxIndex === gameSettings.sizeOfWord - 1
+        }
+        const endOfGame = (currentBoxIndex, currentRowIndex) => {
+            return currentRowIndex === gameSettings.numberOfGuesses - 1 && currentBoxIndex === gameSettings.sizeOfWord - 1
+        }
+
+        if(endOfGame(currentBoxIndex, currentRowIndex)) {
+            console.log("end of game")
+        } else if(endOfRow(currentBoxIndex)) {
+            setGameState({
+                ...gameState,
+                currentGuess: [currentRowIndex + 1, 0]
+            })
+        }else {
+            setGameState({
+                ...gameState,
+                currentGuess: [currentRowIndex, currentBoxIndex + 1]
+            })
+        }
+    }
+
+    const assignGuessToRowBox = (guess) => {
+        const newRows = rows.map(row => {
+            return {...row, props: {...row.props, rowBoxes: row.props.rowBoxes.map(box => ({...box}))}}
+        })
+
+        const currentRowIndex = gameState.currentGuess[0]
+        const currentBoxIndex = gameState.currentGuess[1]
+        newRows[currentRowIndex].props.rowBoxes[currentBoxIndex] = <RowBox key={currentBoxIndex} value={guess} />
+
+        setRows(newRows)
+        updateGuessCoordinates()
     }
 
     return (
@@ -34,7 +68,7 @@ export default function Wordle({gameSettings}) {
                 <Grid rows={rows}/>
             </div>
             <div className="flex justify-center mt-5">
-                <Keyboard setGuess={setGuess}/>
+                <Keyboard setGuess={assignGuessToRowBox}/>
             </div>
         </>
     )
